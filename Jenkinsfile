@@ -12,7 +12,7 @@ pipeline {
         stage('Publish Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('https://dockerhub.com', 'dockerhub_credentials') {
+                    docker.withRegistry('https://dockerhub.com', 'a5aa7a09-e16d-402d-b06e-35b1deaa4d54') {
                         docker.image("my-fastapi-app:${env.BUILD_NUMBER}").push('latest')
                     }
                 }
