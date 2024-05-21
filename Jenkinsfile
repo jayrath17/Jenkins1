@@ -9,10 +9,22 @@ pipeline {
                 }
             }
         }
+        stage('Pytest Tests'){
+            steps {
+                script {
+                    docker.image("my-fastapi-app:${env.BUILD_NUMBER}").inside("--entrypoint=''"){
+                        sh '''#!/bin/bash
+                           echo "Running Tests!"
+                           pytest
+                           '''
+                    }
+                }
+            }
+        }
         stage('Publish Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('docker.io', 'a5aa7a09-e16d-402d-b06e-35b1deaa4d54') {
+                    docker.withRegistry('', 'jayrath17') {
                         docker.image("my-fastapi-app:${env.BUILD_NUMBER}").push('latest')
                     }
                 }
