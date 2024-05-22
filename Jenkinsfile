@@ -24,7 +24,7 @@ pipeline {
         stage('Publish Docker Image') {
             steps {
                 script {
-                    docker.withRegistry('', 'jayrath17') {
+                    docker.withRegistry('', 'a5aa7a09-e16d-402d-b06e-35b1deaa4d54') {
                         docker.image("my-fastapi-app:${env.BUILD_NUMBER}").push('latest')
                     }
                 }
