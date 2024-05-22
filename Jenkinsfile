@@ -14,6 +14,8 @@ pipeline {
                 script {
                     docker.image("my-fastapi-app:${env.BUILD_NUMBER}").inside("--entrypoint=''"){
                         sh '''#!/bin/bash
+                            echo "docker images!"
+                           docker images
                            echo "Running Tests!"
                            pytest
                            '''
