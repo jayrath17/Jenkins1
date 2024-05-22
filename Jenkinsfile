@@ -9,13 +9,19 @@ pipeline {
                 }
             }
         }
+        stage('Run Tests') {
+            steps {
+                script {
+                // Assuming your Docker image name is "${REGISTRY}/${DOCKER_LABEL_PRODUCT}:${VERSION}"
+                sh("""docker run jayrath17/my-fastapi-app:latest pytest tests/""")
+                }
+            }
+            }
         stage('Pytest Tests'){
             steps {
                 script {
                     docker.image("my-fastapi-app:${env.BUILD_NUMBER}").inside("--entrypoint=''"){
                         sh '''#!/bin/bash
-                            echo "docker images!"
-                           docker images
                            echo "Running Tests!"
                            pytest
                            '''
